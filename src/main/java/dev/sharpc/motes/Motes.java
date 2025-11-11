@@ -21,6 +21,4 @@ public class Motes implements ModInitializer
         LOGGER.info("Hello Fabric world!");
         ModItems.initialize();
     }
-
-
 }
