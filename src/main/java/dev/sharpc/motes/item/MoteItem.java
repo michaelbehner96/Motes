@@ -1,17 +1,17 @@
 package dev.sharpc.motes.item;
 
-import dev.sharpc.motes.data.MoteData;
 import dev.sharpc.motes.registry.ModDataComponents;
 import net.fabricmc.loader.impl.util.StringUtil;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public class MoteItem extends Item
 {
@@ -21,15 +21,24 @@ public class MoteItem extends Item
     }
 
     @Override
+    public void appendHoverText(ItemStack itemStack, TooltipContext tooltipContext, TooltipDisplay tooltipDisplay, Consumer<Component> consumer, TooltipFlag tooltipFlag)
+    {
+        var moteId = itemStack.get(ModDataComponents.MOTE_ID);
+
+        if (moteId != null)
+        {
+            consumer.accept(Component.literal("MoteId: " + moteId.id()));
+        }
+    }
+
+    @Override
     public @NotNull Component getName(ItemStack itemStack)
     {
-        return Optional.ofNullable(itemStack.get(ModDataComponents.MOTE))
-                       .map(moteData ->
+        return Optional.ofNullable(itemStack.get(ModDataComponents.MOTE_ID))
+                       .map(moteId ->
                        {
-                           var item = BuiltInRegistries.ITEM.get(moteData.product()).get();
-                           var path = item.key().location().getPath();
+                           var path = moteId.id().getPath();
                            var displayName = StringUtil.capitalize(path.replace('_', ' '));
-
                            return Component.literal(displayName + " Mote");
                        })
                        .orElseGet(() -> (MutableComponent) this.getName(itemStack));

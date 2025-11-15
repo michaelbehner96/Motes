@@ -1,22 +1,23 @@
 package dev.sharpc.motes.registry;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.sharpc.motes.Motes;
-import dev.sharpc.motes.data.MoteData;
+import dev.sharpc.motes.data.mote.MoteData;
+import dev.sharpc.motes.data.mote.MoteId;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 
 public final class ModDataComponents
 {
     public static final DataComponentType<MoteData> MOTE = register("mote",
             DataComponentType.<MoteData>builder()
                              .persistent(MoteData.CODEC)
+                             .build());
+
+    public static final DataComponentType<MoteId> MOTE_ID = register("mote_id",
+            DataComponentType.<MoteId>builder()
+                             .persistent(MoteId.CODEC)
                              .build());
 
     private static <T> DataComponentType<T> register(String dataComponentName, DataComponentType<T> type)
