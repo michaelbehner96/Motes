@@ -1,6 +1,7 @@
 package dev.sharpc.motes.item;
 
 import dev.sharpc.motes.registry.ModDataComponents;
+import dev.sharpc.motes.registry.mote.MoteDefinitions;
 import net.fabricmc.loader.impl.util.StringUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -27,6 +28,19 @@ public class MoteItem extends Item
 
         if (moteId != null)
         {
+            var definition = MoteDefinitions.get(moteId);
+
+            if (definition != null)
+            {
+                consumer.accept(
+                        Component.literal("Element: " + definition.element() + " | Tier: " + definition.tier())
+                );
+
+                consumer.accept(
+                        Component.literal("Product: " + definition.productAmount() + " × " + definition.product().location())
+                );
+            }
+
             consumer.accept(Component.literal("MoteId: " + moteId.id()));
         }
     }
@@ -34,13 +48,37 @@ public class MoteItem extends Item
     @Override
     public @NotNull Component getName(ItemStack itemStack)
     {
-        return Optional.ofNullable(itemStack.get(ModDataComponents.MOTE_ID))
-                       .map(moteId ->
-                       {
-                           var path = moteId.id().getPath();
-                           var displayName = StringUtil.capitalize(path.replace('_', ' '));
-                           return Component.literal(displayName + " Mote");
-                       })
-                       .orElseGet(() -> (MutableComponent) this.getName(itemStack));
+        var moteId = itemStack.get(ModDataComponents.MOTE_ID);
+
+        if (moteId != null)
+        {
+            var definition = MoteDefinitions.get(moteId);
+
+            if (definition != null)
+            {
+                var elementName = switch (definition.element())
+                {
+                    case FIRE -> "Fire";
+                    case WATER -> "Water";
+                    case EARTH -> "Earth";
+                    case WIND -> "Wind";
+                    case LIGHT -> "Light";
+                    case DARK -> "Dark";
+                };
+
+                var tierLabel = switch (definition.tier())
+                {
+                    case 0 -> "Primal";
+                    case 1 -> "Lesser";
+                    case 2 -> "Greater";
+                    case 3 -> "Ascendant";
+                    default -> "Tier " + definition.tier();
+                };
+
+                return Component.literal(tierLabel + " " + elementName + " Mote");
+            }
+        }
+
+        return super.getName(itemStack);
     }
 }

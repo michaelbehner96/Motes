@@ -1,7 +1,6 @@
 package dev.sharpc.motes.registry;
 
 import dev.sharpc.motes.Motes;
-import dev.sharpc.motes.data.mote.MoteData;
 import dev.sharpc.motes.data.mote.MoteId;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
@@ -10,11 +9,6 @@ import net.minecraft.resources.ResourceLocation;
 
 public final class ModDataComponents
 {
-    public static final DataComponentType<MoteData> MOTE = register("mote",
-            DataComponentType.<MoteData>builder()
-                             .persistent(MoteData.CODEC)
-                             .build());
-
     public static final DataComponentType<MoteId> MOTE_ID = register("mote_id",
             DataComponentType.<MoteId>builder()
                              .persistent(MoteId.CODEC)
