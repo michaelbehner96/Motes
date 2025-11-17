@@ -11,6 +11,7 @@ import net.minecraft.world.item.Item;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public final class MoteDefinitions
@@ -27,12 +28,12 @@ public final class MoteDefinitions
         }
 
         // TODO Move logic into datapacks (code driven -> data driven)
-        register(new MoteDefinition(MoteIds.FIRE, MoteElement.FIRE, 0, 100, vanillaItem("coal"), 1));
-        register(new MoteDefinition(MoteIds.WATER, MoteElement.WATER, 0, 100, vanillaItem("clay_ball"), 1));
-        register(new MoteDefinition(MoteIds.EARTH, MoteElement.EARTH, 0, 100, vanillaItem("flint"), 1));
-        register(new MoteDefinition(MoteIds.WIND, MoteElement.WIND, 0, 100, vanillaItem("string"), 1));
-        register(new MoteDefinition(MoteIds.LIGHT, MoteElement.LIGHT, 0, 100, vanillaItem("glowstone_dust"), 1));
-        register(new MoteDefinition(MoteIds.DARK, MoteElement.DARK, 0, 100, vanillaItem("ender_pearl"), 1));
+        register(new MoteDefinition(MoteIds.FIRE, MoteElement.FIRE, 0, 1.0f, vanillaItem("coal"), 1, List.of()));
+        register(new MoteDefinition(MoteIds.WATER, MoteElement.WATER, 0, 1.0f, vanillaItem("clay_ball"), 1, List.of()));
+        register(new MoteDefinition(MoteIds.EARTH, MoteElement.EARTH, 0, 1.0f, vanillaItem("flint"), 1, List.of()));
+        register(new MoteDefinition(MoteIds.WIND, MoteElement.WIND, 0, 1.0f, vanillaItem("string"), 1, List.of()));
+        register(new MoteDefinition(MoteIds.LIGHT, MoteElement.LIGHT, 0, 1.0f, vanillaItem("glowstone_dust"), 1, List.of()));
+        register(new MoteDefinition(MoteIds.DARK, MoteElement.DARK, 0, 1.0f, vanillaItem("ender_pearl"), 1, List.of()));
 
         bootstrapped = true;
     }
