@@ -12,6 +12,7 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+import org.joml.Vector2i;
 
 
 public class FocusChamberMenu extends AbstractContainerMenu
@@ -19,6 +20,14 @@ public class FocusChamberMenu extends AbstractContainerMenu
     private final Container container;
     private final ContainerData containerData;
     private final Level level;
+
+    public static final Vector2i MOTE_SLOT_POSITION = new Vector2i(26, 30);
+    public static final Vector2i CATALYST_SLOT_POSITION = new Vector2i(62, 30);
+    public static final Vector2i REGRESSION_A_SLOT_POSITION = new Vector2i(17, 57);
+    public static final Vector2i REGRESSION_B_SLOT_POSITION = new Vector2i(35, 57);
+    public static final Vector2i PRODUCT_SLOT_POSITION = new Vector2i(134, 30);
+    public static final Vector2i PLAYER_INVENTORY_POSITION = new Vector2i(8, 84);
+    public static final Vector2i PLAYER_HOTBAR_POSITION = new Vector2i(8, 142);
 
     /**
      * Server-side constructor called by FocusChamberBlockEntity::createMenu.
@@ -32,7 +41,6 @@ public class FocusChamberMenu extends AbstractContainerMenu
         this.containerData = containerData;
         this.level = playerInventory.player.level();
         this.addDataSlots(containerData);
-
     }
 
     /**
