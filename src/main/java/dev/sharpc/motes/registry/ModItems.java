@@ -54,14 +54,9 @@ public final class ModItems
 
     public static Item register(String name, Function<Item.Properties, Item> function, Item.Properties properties)
     {
-        var key = createItemResourceKey(name);
+        var key = Motes.createModdedResourceKey(Registries.ITEM, name);
         var item = function.apply(properties.setId(key));
         return Registry.register(BuiltInRegistries.ITEM, key, item);
-    }
-
-    private static ResourceKey<Item> createItemResourceKey(String itemName)
-    {
-        return ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Motes.MOD_ID, itemName));
     }
 
     public static void initialize()

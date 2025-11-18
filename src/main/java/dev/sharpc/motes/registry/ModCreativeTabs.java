@@ -25,6 +25,7 @@ public final class ModCreativeTabs
                                entries.accept(ModItems.WIND_MOTE);
                                entries.accept(ModItems.LIGHT_MOTE);
                                entries.accept(ModItems.DARK_MOTE);
+                               entries.accept(ModBlocks.FOCUS_CHAMBER);
                            }).build();
 
     public static void initialize()

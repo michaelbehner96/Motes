@@ -1,8 +1,6 @@
 package dev.sharpc.motes;
 
-import dev.sharpc.motes.registry.ModCreativeTabs;
-import dev.sharpc.motes.registry.ModDataComponents;
-import dev.sharpc.motes.registry.ModItems;
+import dev.sharpc.motes.registry.*;
 import dev.sharpc.motes.registry.mote.MoteDefinitions;
 import net.fabricmc.api.ModInitializer;
 
@@ -20,6 +18,8 @@ public class Motes implements ModInitializer
     @Override
     public void onInitialize()
     {
+        ModBlocks.initialize();
+        ModBlockEntities.initialize();
         ModItems.initialize();
         ModDataComponents.initialize();
         MoteDefinitions.bootstrap();

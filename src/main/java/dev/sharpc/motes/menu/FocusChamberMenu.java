@@ -1,0 +1,111 @@
+package dev.sharpc.motes.menu;
+
+import dev.sharpc.motes.blockentity.FocusChamberBlockEntity;
+import dev.sharpc.motes.registry.ModMenus;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
+
+
+public class FocusChamberMenu extends AbstractContainerMenu
+{
+    private final Container container;
+    private final ContainerData containerData;
+    private final Level level;
+
+    /**
+     * Server-side constructor called by FocusChamberBlockEntity::createMenu.
+     */
+    public FocusChamberMenu(int syncId, Inventory playerInventory, Container container, ContainerData containerData)
+    {
+        super(ModMenus.FOCUS_CHAMBER, syncId);
+        checkContainerSize(container, FocusChamberBlockEntity.CONTAINER_SIZE);
+        checkContainerDataCount(containerData, FocusChamberBlockEntity.CONTAINER_DATA_COUNT);
+        this.container = container;
+        this.containerData = containerData;
+        this.level = playerInventory.player.level();
+        this.addDataSlots(containerData);
+
+    }
+
+    /**
+     * Client-side only constructor.
+     */
+    public FocusChamberMenu(int syncId, Inventory playerInventory)
+    {
+        this(syncId, playerInventory, new SimpleContainer(FocusChamberBlockEntity.CONTAINER_SIZE), new SimpleContainerData(FocusChamberBlockEntity.CONTAINER_DATA_COUNT));
+    }
+
+    @Override
+    public @NotNull ItemStack quickMoveStack(Player player, int index)
+    {
+        var originalStack = ItemStack.EMPTY;
+        var slot = this.slots.get(index);
+
+        if (slot.hasItem())
+        {
+            var stackInSlot = slot.getItem();
+            originalStack = stackInSlot.copy();
+
+            // 1) Clicked from block inventory → move to player
+            if (index < BLOCK_INV_SIZE)
+            {
+                if (!this.moveItemStackTo(
+                        stackInSlot,
+                        PLAYER_INV_START,
+                        PLAYER_INV_END,
+                        true)) // try from hotbar backwards
+                {
+                    return ItemStack.EMPTY;
+                }
+            }
+            // 2) Clicked from player inventory/hotbar → move to block
+            else
+            {
+                // You can decide which block slots are valid.
+                // Basic version: try to put into any block slot
+                if (!this.moveItemStackTo(
+                        stackInSlot,
+                        0,
+                        BLOCK_INV_SIZE,
+                        false))
+                {
+                    return ItemStack.EMPTY;
+                }
+            }
+
+            // If the stack is now empty, clear the slot
+            if (stackInSlot.isEmpty())
+            {
+                slot.set(ItemStack.EMPTY);
+            } else
+            {
+                slot.setChanged();
+            }
+
+            // If nothing actually changed, bail
+            if (stackInSlot.getCount() == originalStack.getCount())
+            {
+                return ItemStack.EMPTY;
+            }
+
+            slot.onTake(player, stackInSlot);
+        }
+
+        return originalStack;
+    }
+
+
+    @Override
+    public boolean stillValid(Player player)
+    {
+        return container.stillValid(player);
+    }
+}
