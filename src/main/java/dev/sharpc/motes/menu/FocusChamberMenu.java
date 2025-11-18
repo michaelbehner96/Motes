@@ -1,6 +1,9 @@
 package dev.sharpc.motes.menu;
 
 import dev.sharpc.motes.blockentity.FocusChamberBlockEntity;
+import dev.sharpc.motes.menu.slot.MoteSlot;
+import dev.sharpc.motes.menu.slot.OutputSlot;
+import dev.sharpc.motes.menu.slot.SlotLayoutHelper;
 import dev.sharpc.motes.registry.ModMenus;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -41,6 +44,13 @@ public class FocusChamberMenu extends AbstractContainerMenu
         this.containerData = containerData;
         this.level = playerInventory.player.level();
         this.addDataSlots(containerData);
+        SlotLayoutHelper.addSlot(container, FocusChamberBlockEntity.SLOT_MOTE, MOTE_SLOT_POSITION, MoteSlot::new, this::addSlot);
+        SlotLayoutHelper.addSlot(container, FocusChamberBlockEntity.SLOT_PRODUCT, PRODUCT_SLOT_POSITION, OutputSlot::new, this::addSlot);
+        SlotLayoutHelper.addSlot(container, FocusChamberBlockEntity.SLOT_REGRESSION_A, REGRESSION_A_SLOT_POSITION, OutputSlot::new, this::addSlot);
+        SlotLayoutHelper.addSlot(container, FocusChamberBlockEntity.SLOT_REGRESSION_B, REGRESSION_B_SLOT_POSITION, OutputSlot::new, this::addSlot);
+        SlotLayoutHelper.addSlot(container, FocusChamberBlockEntity.SLOT_CATALYST, CATALYST_SLOT_POSITION, this::addSlot);
+        SlotLayoutHelper.addPlayerInventorySlots(playerInventory, PLAYER_INVENTORY_POSITION, this::addSlot);
+        SlotLayoutHelper.addPlayerHotbarSlots(playerInventory, PLAYER_HOTBAR_POSITION, this::addSlot);
     }
 
     /**
@@ -63,12 +73,12 @@ public class FocusChamberMenu extends AbstractContainerMenu
             originalStack = stackInSlot.copy();
 
             // 1) Clicked from block inventory → move to player
-            if (index < BLOCK_INV_SIZE)
+            if (index < FocusChamberBlockEntity.CONTAINER_SIZE)
             {
                 if (!this.moveItemStackTo(
                         stackInSlot,
-                        PLAYER_INV_START,
-                        PLAYER_INV_END,
+                        FocusChamberBlockEntity.CONTAINER_SIZE,
+                        FocusChamberBlockEntity.CONTAINER_SIZE + 36,
                         true)) // try from hotbar backwards
                 {
                     return ItemStack.EMPTY;
@@ -82,7 +92,7 @@ public class FocusChamberMenu extends AbstractContainerMenu
                 if (!this.moveItemStackTo(
                         stackInSlot,
                         0,
-                        BLOCK_INV_SIZE,
+                        FocusChamberBlockEntity.CONTAINER_SIZE,
                         false))
                 {
                     return ItemStack.EMPTY;

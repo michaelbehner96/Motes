@@ -1,5 +1,6 @@
 package dev.sharpc.motes.menu.slot;
 
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 import org.joml.Vector2i;
@@ -8,6 +9,17 @@ import java.util.function.Consumer;
 
 public final class SlotLayoutHelper
 {
+    public static void addSlot(Container container, int index, Vector2i position, Consumer<Slot> slotConsumer)
+    {
+        addSlot(container, index, position, Slot::new, slotConsumer);
+    }
+
+    public static <T extends Slot> void addSlot(Container container, int index, Vector2i position, SlotFactory<T> slotFactory, Consumer<T> slotConsumer)
+    {
+        var slot = slotFactory.create(container, index, position.x, position.y);
+        slotConsumer.accept(slot);
+    }
+
     public static void addPlayerHotbarSlots(Inventory playerInventory,
             Vector2i startingPosition,
             int slotOffset,

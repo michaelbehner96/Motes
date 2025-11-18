@@ -1,5 +1,8 @@
 package dev.sharpc.motes.data.mote;
 
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import org.jetbrains.annotations.Nullable;
@@ -38,6 +41,19 @@ public record MoteDefinition(
 
         if (componentMotes.size() > 2)
             throw new IllegalArgumentException("componentMotes of size greater than 2 is not supported.");
+    }
+
+    public @Nullable Item getProductAsItem()
+    {
+        if (product != null)
+        {
+            var optional = BuiltInRegistries.ITEM.get(product);
+
+            if (optional.isPresent())
+                return optional.get().value();
+        }
+
+        return null;
     }
 
     public boolean hasComponentMotes()

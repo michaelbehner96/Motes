@@ -15,9 +15,7 @@ public final class ModMenus
     public static final MenuType<FocusChamberMenu> FOCUS_CHAMBER =
             register("focus_chamber", FocusChamberMenu::new);
 
-    private static <T extends AbstractContainerMenu> MenuType<T> register(
-            String name,
-            MenuType.MenuSupplier<T> factory)
+    private static <T extends AbstractContainerMenu> MenuType<T> register(String name, MenuType.MenuSupplier<T> factory)
     {
         var key = Motes.createModdedResourceKey(Registries.MENU, name);
         var type = new MenuType<>(factory, FeatureFlagSet.of());

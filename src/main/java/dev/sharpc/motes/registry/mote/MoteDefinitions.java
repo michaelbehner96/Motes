@@ -8,6 +8,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -43,7 +44,7 @@ public final class MoteDefinitions
         if (BY_ID.put(definition.id(), definition) != null) throw new IllegalStateException("Duplicate mote definition for id " + definition.id());
     }
 
-    public static MoteDefinition get(MoteId id)
+    public static @Nullable MoteDefinition get(MoteId id)
     {
         return BY_ID.get(id);
     }
