@@ -1,6 +1,6 @@
 {
   "model": {
     "type":  "minecraft:model",
-    "model": "motes:item/light_mote"
+    "model": "motes:item/mote/wind"
   }
 }

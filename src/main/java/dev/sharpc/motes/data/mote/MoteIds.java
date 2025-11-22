@@ -1,6 +1,4 @@
-package dev.sharpc.motes.registry.mote;
-
-import dev.sharpc.motes.data.mote.MoteId;
+package dev.sharpc.motes.data.mote;
 
 public final class MoteIds
 {

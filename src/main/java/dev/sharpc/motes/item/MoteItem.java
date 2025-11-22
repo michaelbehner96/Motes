@@ -1,17 +1,17 @@
 package dev.sharpc.motes.item;
 
+import dev.sharpc.motes.Motes;
+import dev.sharpc.motes.data.mote.MoteId;
 import dev.sharpc.motes.registry.ModDataComponents;
-import dev.sharpc.motes.registry.mote.MoteDefinitions;
-import net.fabricmc.loader.impl.util.StringUtil;
+import dev.sharpc.motes.registry.ModItems;
+import dev.sharpc.motes.data.mote.MoteDefinitions;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.Optional;
 import java.util.function.Consumer;
 
 public class MoteItem extends Item
@@ -22,63 +22,48 @@ public class MoteItem extends Item
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, TooltipContext tooltipContext, TooltipDisplay tooltipDisplay, Consumer<Component> consumer, TooltipFlag tooltipFlag)
+    public Component getName(ItemStack stack)
     {
-        var moteId = itemStack.get(ModDataComponents.MOTE_ID);
+        var customName = stack.get(DataComponents.CUSTOM_NAME);
+        if (customName != null)
+            return customName;
 
-        if (moteId != null)
-        {
-            var definition = MoteDefinitions.get(moteId);
+        var moteId = stack.get(ModDataComponents.MOTE_ID);
 
-            if (definition != null)
-            {
-                consumer.accept(
-                        Component.literal("Element: " + definition.element() + " | Tier: " + definition.tier())
-                );
+        if (moteId == null)
+            return super.getName(stack);
 
-                consumer.accept(
-                        Component.literal("Product: " + definition.productAmount() + " × " + definition.product().location())
-                );
-            }
-
-            consumer.accept(Component.literal("MoteId: " + moteId.id()));
-        }
+        return Component.translatable("item.motes.mote.named",
+                Component.translatable(moteId.getTranslationKey()));
     }
 
     @Override
-    public @NotNull Component getName(ItemStack itemStack)
+    public void appendHoverText(ItemStack itemStack, TooltipContext tooltipContext, TooltipDisplay tooltipDisplay, Consumer<Component> consumer, TooltipFlag tooltipFlag)
     {
-        var moteId = itemStack.get(ModDataComponents.MOTE_ID);
+        var id = itemStack.get(ModDataComponents.MOTE_ID);
 
-        if (moteId != null)
+        if (id != null)
         {
-            var definition = MoteDefinitions.get(moteId);
+            consumer.accept(Component.literal("MoteId: " + id.id()));
+
+            var definition = MoteDefinitions.get(id);
 
             if (definition != null)
-            {
-                var elementName = switch (definition.element())
-                {
-                    case FIRE -> "Fire";
-                    case WATER -> "Water";
-                    case EARTH -> "Earth";
-                    case WIND -> "Wind";
-                    case LIGHT -> "Light";
-                    case DARK -> "Dark";
-                };
-
-                var tierLabel = switch (definition.tier())
-                {
-                    case 0 -> "Primal";
-                    case 1 -> "Lesser";
-                    case 2 -> "Greater";
-                    case 3 -> "Ascendant";
-                    default -> "Tier " + definition.tier();
-                };
-
-                return Component.literal(tierLabel + " " + elementName + " Mote");
-            }
+                consumer.accept(Component.literal("Stability: " + definition.stability()));
         }
+    }
 
-        return super.getName(itemStack);
+
+    public static ItemStack stackOf(MoteId id, int quantity)
+    {
+        var stack = new ItemStack(ModItems.MOTE, quantity);
+        stack.set(DataComponents.ITEM_MODEL, id.id().withPrefix(Motes.MOTE_PATH_PREFIX));
+        stack.set(ModDataComponents.MOTE_ID, id);
+        return stack;
+    }
+
+    public static ItemStack stackOf(MoteId id)
+    {
+        return stackOf(id, 1);
     }
 }

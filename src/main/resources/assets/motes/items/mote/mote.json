@@ -1,6 +1,6 @@
 {
   "model": {
     "type":  "minecraft:model",
-    "model": "motes:item/dark_mote"
+    "model": "motes:item/mote/default"
   }
 }

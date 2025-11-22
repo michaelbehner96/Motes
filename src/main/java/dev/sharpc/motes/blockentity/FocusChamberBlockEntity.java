@@ -6,7 +6,7 @@ import dev.sharpc.motes.item.MoteItem;
 import dev.sharpc.motes.menu.FocusChamberMenu;
 import dev.sharpc.motes.registry.ModBlockEntities;
 import dev.sharpc.motes.registry.ModDataComponents;
-import dev.sharpc.motes.registry.mote.MoteDefinitions;
+import dev.sharpc.motes.data.mote.MoteDefinitions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
@@ -15,6 +15,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -26,30 +27,45 @@ import org.jetbrains.annotations.Nullable;
 
 public class FocusChamberBlockEntity extends BaseContainerBlockEntity
 {
+    private static final Component MENU_NAME = Component.translatable("container.focus_chamber");
+
+    // Inventory
+    private NonNullList<ItemStack> items = NonNullList.withSize(CONTAINER_SIZE, ItemStack.EMPTY);
+    public static final int CONTAINER_SIZE = 5;
     public static final int SLOT_MOTE = 0;
     public static final int SLOT_PRODUCT = 1;
     public static final int SLOT_REGRESSION_A = 2;
     public static final int SLOT_REGRESSION_B = 3;
     public static final int SLOT_CATALYST = 4;
-    public static final int CONTAINER_SIZE = 5;
-    public static final int CONTAINER_DATA_COUNT = 0;
-    private static final Component MENU_NAME = Component.translatable("container.focus_chamber");
-    private NonNullList<ItemStack> items = NonNullList.withSize(CONTAINER_SIZE, ItemStack.EMPTY);
 
-    private int progress, maxProgress;
+    // Data
+    private int progress;
+    private int maxProgress;
+    public static final int CONTAINER_DATA_COUNT = 2;
+    public static final int DATA_PROGRESS = 0;
+    public static final int DATA_MAX_PROGRESS = 1;
 
     protected final ContainerData containerData = new ContainerData()
     {
         @Override
         public int get(int index)
         {
-            return 0;
+            return switch (index)
+            {
+                case DATA_PROGRESS -> FocusChamberBlockEntity.this.getProgress();
+                case DATA_MAX_PROGRESS -> FocusChamberBlockEntity.this.getMaxProgress();
+                default -> 0;
+            };
         }
 
         @Override
         public void set(int index, int value)
         {
-
+            switch (index)
+            {
+                case DATA_PROGRESS -> FocusChamberBlockEntity.this.progress = (value);
+                case DATA_MAX_PROGRESS -> FocusChamberBlockEntity.this.maxProgress = (value);
+            }
         }
 
         @Override
@@ -78,9 +94,8 @@ public class FocusChamberBlockEntity extends BaseContainerBlockEntity
         if (moteDefinition == null)
             return;
 
-        maxProgress = getProductionCycleForTier(moteDefinition.tier());
+        maxProgress = 60 * 20;
         progress++;
-        setChanged();
 
         if (progress >= maxProgress)
         {
@@ -93,7 +108,7 @@ public class FocusChamberBlockEntity extends BaseContainerBlockEntity
     private void completeProductionCycle(MoteDefinition producerMoteDefinition)
     {
         var productStack = getProductStack();
-        var result = new ItemStack(producerMoteDefinition.getProductAsItem(), producerMoteDefinition.productAmount());
+        var result = new ItemStack(Items.AMETHYST_SHARD, 4);
         if (productStack.isEmpty())
         {
             setItem(SLOT_PRODUCT, result);
@@ -185,6 +200,7 @@ public class FocusChamberBlockEntity extends BaseContainerBlockEntity
         if (productSlotIsFull())
             return false;
 
+        /*
         var moteDefinition = getSlottedMoteDefinition();
 
         if (moteDefinition != null)
@@ -196,11 +212,11 @@ public class FocusChamberBlockEntity extends BaseContainerBlockEntity
 
             var productsMatch = getProductStack().isEmpty() || getProductStack().is(moteProduct);
             var productStackHasRoom =
-                    getProductStack().getMaxStackSize() <= getProductStack().getCount() + moteDefinition.productAmount();
+                    getProductStack().getMaxStackSize() >= getProductStack().getCount() + moteDefinition.productAmount();
 
             return productsMatch && productStackHasRoom;
         }
-
+        */
         return false;
     }
 
@@ -225,7 +241,7 @@ public class FocusChamberBlockEntity extends BaseContainerBlockEntity
     {
         return switch (tier)
         {
-            case 0 -> 20 * 6;   // 60s
+            case 0 -> 20 * 60;   // 60s
             case 1 -> 20 * 90;   // 90s
             case 2 -> 20 * 140;  // 140s
             case 3 -> 20 * 210;  // 210s
@@ -233,6 +249,16 @@ public class FocusChamberBlockEntity extends BaseContainerBlockEntity
             case 5 -> 20 * 480;  // 480s
             default -> 20 * 600; // fallback = 10 minutes
         };
+    }
+
+    public int getMaxProgress()
+    {
+        return maxProgress;
+    }
+
+    public int getProgress()
+    {
+        return progress;
     }
 
     @Override
@@ -274,6 +300,8 @@ public class FocusChamberBlockEntity extends BaseContainerBlockEntity
         super.loadAdditional(valueInput);
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
         ContainerHelper.loadAllItems(valueInput, this.items);
+        this.progress = valueInput.getIntOr("progress", 0);
+        this.maxProgress = valueInput.getIntOr("maxProgress", 0);
     }
 
     @Override
@@ -281,5 +309,7 @@ public class FocusChamberBlockEntity extends BaseContainerBlockEntity
     {
         super.saveAdditional(valueOutput);
         ContainerHelper.saveAllItems(valueOutput, this.items);
+        valueOutput.putInt("progress", getProgress());
+        valueOutput.putInt("maxProgress", getMaxProgress());
     }
 }

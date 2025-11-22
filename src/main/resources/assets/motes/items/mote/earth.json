@@ -1,6 +1,6 @@
 {
   "model": {
     "type":  "minecraft:model",
-    "model": "motes:item/water_mote"
+    "model": "motes:item/mote/earth"
   }
 }

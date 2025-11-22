@@ -1,4 +1,12 @@
 {
-  "itemGroup.motes.motes": "Motes",
-  "container.focus_chamber": "Focus Chamber"
+  "itemGroup.motes.motes":   "Motes",
+  "container.focus_chamber": "Focus Chamber",
+  "item.motes.mote.mote":    "Mote",
+  "item.motes.mote.named":   "%s Mote",
+  "mote.motes.fire":         "Fire",
+  "mote.motes.water":        "Water",
+  "mote.motes.earth":        "Earth",
+  "mote.motes.wind":         "Wind",
+  "mote.motes.light":        "Light",
+  "mote.motes.dark":         "Dark"
 }
