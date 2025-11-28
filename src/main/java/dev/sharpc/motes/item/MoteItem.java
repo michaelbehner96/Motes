@@ -1,10 +1,10 @@
 package dev.sharpc.motes.item;
 
 import dev.sharpc.motes.Motes;
-import dev.sharpc.motes.data.mote.MoteId;
+import dev.sharpc.motes.data.model.mote.MoteId;
 import dev.sharpc.motes.registry.ModDataComponents;
 import dev.sharpc.motes.registry.ModItems;
-import dev.sharpc.motes.data.mote.MoteDefinitions;
+import dev.sharpc.motes.data.registry.MoteDefinitions;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;

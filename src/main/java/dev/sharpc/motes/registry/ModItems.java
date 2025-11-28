@@ -1,6 +1,7 @@
 package dev.sharpc.motes.registry;
 
 import dev.sharpc.motes.Motes;
+import dev.sharpc.motes.item.MaterialItem;
 import dev.sharpc.motes.item.MoteItem;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -14,8 +15,13 @@ import java.util.function.Function;
 public final class ModItems
 {
     public static final Item MOTE = register(
-            Motes.createMotesResourceLocation("mote"),
+            Motes.createMoteResourceLocation("mote"),
             MoteItem::new,
+            new Item.Properties());
+
+    public static final Item MATERIAL = register(
+            Motes.createMaterialResourceLocation("material"),
+            MaterialItem::new,
             new Item.Properties());
 
     public static Item register(String name, Function<Item.Properties, Item> function, Item.Properties properties)

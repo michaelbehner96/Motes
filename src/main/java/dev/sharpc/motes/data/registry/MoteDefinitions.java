@@ -1,5 +1,7 @@
-package dev.sharpc.motes.data.mote;
+package dev.sharpc.motes.data.registry;
 
+import dev.sharpc.motes.data.model.mote.MoteDefinition;
+import dev.sharpc.motes.data.model.mote.MoteId;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;

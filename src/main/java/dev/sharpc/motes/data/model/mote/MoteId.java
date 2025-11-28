@@ -1,8 +1,7 @@
-package dev.sharpc.motes.data.mote;
+package dev.sharpc.motes.data.model.mote;
 
 import com.mojang.serialization.Codec;
 import dev.sharpc.motes.Motes;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 public record MoteId(ResourceLocation id)

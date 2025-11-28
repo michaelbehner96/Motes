@@ -1,6 +1,9 @@
-package dev.sharpc.motes.data.mote;
+package dev.sharpc.motes.data.loader;
 
 import dev.sharpc.motes.Motes;
+import dev.sharpc.motes.data.model.mote.MoteDefinition;
+import dev.sharpc.motes.data.model.mote.MoteId;
+import dev.sharpc.motes.data.registry.MoteDefinitions;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.minecraft.resources.FileToIdConverter;
 import net.minecraft.resources.ResourceLocation;
@@ -19,7 +22,10 @@ public final class MoteDefinitionLoader
 
     public MoteDefinitionLoader()
     {
-        super(MoteDefinition.CODEC, FileToIdConverter.json("mote_definitions"));
+        // data/motes/mote_definitions/fire.json -> motes:fire
+        // data/motes/mote_definitions/water.json -> motes:water
+        // etc.
+        super(MoteDefinition.CODEC, FileToIdConverter.json(ID.getPath()));
     }
 
     @Override

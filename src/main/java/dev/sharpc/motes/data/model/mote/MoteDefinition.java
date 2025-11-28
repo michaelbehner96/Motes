@@ -1,8 +1,8 @@
-package dev.sharpc.motes.data.mote;
+package dev.sharpc.motes.data.model.mote;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
 

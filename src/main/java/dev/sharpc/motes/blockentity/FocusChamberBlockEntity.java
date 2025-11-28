@@ -1,12 +1,12 @@
 package dev.sharpc.motes.blockentity;
 
-import dev.sharpc.motes.data.mote.MoteDefinition;
-import dev.sharpc.motes.data.mote.MoteId;
+import dev.sharpc.motes.data.model.mote.MoteDefinition;
+import dev.sharpc.motes.data.model.mote.MoteId;
 import dev.sharpc.motes.item.MoteItem;
 import dev.sharpc.motes.menu.FocusChamberMenu;
 import dev.sharpc.motes.registry.ModBlockEntities;
 import dev.sharpc.motes.registry.ModDataComponents;
-import dev.sharpc.motes.data.mote.MoteDefinitions;
+import dev.sharpc.motes.data.registry.MoteDefinitions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
