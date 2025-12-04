@@ -1,10 +1,10 @@
 package dev.sharpc.motes.registry;
 
 import dev.sharpc.motes.Motes;
-import dev.sharpc.motes.data.registry.MaterialIds;
-import dev.sharpc.motes.item.MaterialItem;
+import dev.sharpc.motes.data.model.mote.GrainId;
+import dev.sharpc.motes.data.registry.MoteDefinitions;
+import dev.sharpc.motes.item.GrainItem;
 import dev.sharpc.motes.item.MoteItem;
-import dev.sharpc.motes.data.registry.MoteIds;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -24,20 +24,17 @@ public final class ModCreativeTabs
                            .displayItems((context, entries) ->
                            {
                                // Motes
-                               entries.accept(MoteItem.stackOf(MoteIds.FIRE));
-                               entries.accept(MoteItem.stackOf(MoteIds.EARTH));
-                               entries.accept(MoteItem.stackOf(MoteIds.WATER));
-                               entries.accept(MoteItem.stackOf(MoteIds.WIND));
-                               entries.accept(MoteItem.stackOf(MoteIds.DARK));
-                               entries.accept(MoteItem.stackOf(MoteIds.LIGHT));
+                               Motes.LOGGER.info("Dynamically adding motes to creative tab for {} definition(s).", MoteDefinitions.all().size());
+                               for (var definition : MoteDefinitions.all().entrySet())
+                                   entries.accept(MoteItem.stackOf(definition.getKey()));
 
-                               // Materials
-                               entries.accept(MaterialItem.stackOf(MaterialIds.FIRE));
-                               entries.accept(MaterialItem.stackOf(MaterialIds.WATER));
-                               entries.accept(MaterialItem.stackOf(MaterialIds.EARTH));
-                               entries.accept(MaterialItem.stackOf(MaterialIds.WIND));
-                               entries.accept(MaterialItem.stackOf(MaterialIds.LIGHT));
-                               entries.accept(MaterialItem.stackOf(MaterialIds.DARK));
+                               // Grains
+                               entries.accept(GrainItem.stackOf(GrainId.FIRE));
+                               entries.accept(GrainItem.stackOf(GrainId.WATER));
+                               entries.accept(GrainItem.stackOf(GrainId.EARTH));
+                               entries.accept(GrainItem.stackOf(GrainId.WIND));
+                               entries.accept(GrainItem.stackOf(GrainId.LIGHT));
+                               entries.accept(GrainItem.stackOf(GrainId.DARK));
 
                                entries.accept(ModBlocks.FOCUS_CHAMBER);
                            }).build();

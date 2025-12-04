@@ -17,8 +17,6 @@ import org.slf4j.LoggerFactory;
 public class Motes implements ModInitializer
 {
     public static final String MOD_ID = "motes";
-    public static final String MOTE_PATH_PREFIX = "mote/";
-    public static final String MATERIAL_PATH_PREFIX = "material/";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     @Override
@@ -42,16 +40,6 @@ public class Motes implements ModInitializer
     public static ResourceLocation createModdedResourceLocation(String path)
     {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
-    }
-
-    public static ResourceLocation createMoteResourceLocation(String path)
-    {
-        return createModdedResourceLocation(MOTE_PATH_PREFIX + path);
-    }
-
-    public static ResourceLocation createMaterialResourceLocation(String path)
-    {
-        return createModdedResourceLocation(MATERIAL_PATH_PREFIX + path);
     }
 
     public static <T> ResourceKey<T> createModdedResourceKey(ResourceKey<? extends Registry<T>> resourceKey, String path)

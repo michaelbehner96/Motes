@@ -2,7 +2,6 @@ package dev.sharpc.motes.data.model.recipe;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.sharpc.motes.Motes;
 import dev.sharpc.motes.data.model.mote.MoteId;
 import net.minecraft.resources.ResourceLocation;
 

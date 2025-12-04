@@ -1,5 +1,6 @@
 package dev.sharpc.motes.data.registry;
 
+import dev.sharpc.motes.Motes;
 import dev.sharpc.motes.data.model.mote.MoteDefinition;
 import dev.sharpc.motes.data.model.mote.MoteId;
 import org.jetbrains.annotations.Nullable;
@@ -13,6 +14,7 @@ public final class MoteDefinitions
     public static void register(MoteId id, MoteDefinition definition)
     {
         if (DEFINITIONS.put(id, definition) != null) throw new IllegalStateException("Duplicate mote definition for moteId " + id);
+        Motes.LOGGER.info("Registered definition for: {} ({} total)", id.id(), DEFINITIONS.size());
     }
 
     public static @Nullable MoteDefinition get(MoteId id)

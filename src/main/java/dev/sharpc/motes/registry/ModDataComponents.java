@@ -1,7 +1,7 @@
 package dev.sharpc.motes.registry;
 
 import dev.sharpc.motes.Motes;
-import dev.sharpc.motes.data.model.mote.MaterialId;
+import dev.sharpc.motes.data.model.mote.GrainId;
 import dev.sharpc.motes.data.model.mote.MoteId;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
@@ -15,9 +15,9 @@ public final class ModDataComponents
                              .persistent(MoteId.CODEC)
                              .build());
 
-    public static final DataComponentType<MaterialId> MATERIAL_ID = register("material_id",
-            DataComponentType.<MaterialId>builder()
-                             .persistent(MaterialId.CODEC)
+    public static final DataComponentType<GrainId> GRAIN_ID = register("grain_id",
+            DataComponentType.<GrainId>builder()
+                             .persistent(GrainId.CODEC)
                              .build());
 
     private static <T> DataComponentType<T> register(String dataComponentName, DataComponentType<T> type)

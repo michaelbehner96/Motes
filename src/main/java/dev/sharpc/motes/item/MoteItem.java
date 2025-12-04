@@ -1,6 +1,5 @@
 package dev.sharpc.motes.item;
 
-import dev.sharpc.motes.Motes;
 import dev.sharpc.motes.data.model.mote.MoteId;
 import dev.sharpc.motes.registry.ModDataComponents;
 import dev.sharpc.motes.registry.ModItems;
@@ -11,9 +10,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
+@SuppressWarnings("deprecation")
 public class MoteItem extends Item
 {
     public MoteItem(Properties properties)
@@ -22,7 +23,7 @@ public class MoteItem extends Item
     }
 
     @Override
-    public Component getName(ItemStack stack)
+    public @NotNull Component getName(ItemStack stack)
     {
         var customName = stack.get(DataComponents.CUSTOM_NAME);
         if (customName != null)
@@ -45,6 +46,7 @@ public class MoteItem extends Item
         if (id != null)
         {
             consumer.accept(Component.literal("MoteId: " + id.id()));
+            consumer.accept(Component.literal("Mote Model: " + id.id()));
 
             var definition = MoteDefinitions.get(id);
 
@@ -53,12 +55,16 @@ public class MoteItem extends Item
         }
     }
 
-
     public static ItemStack stackOf(MoteId id, int quantity)
     {
         var stack = new ItemStack(ModItems.MOTE, quantity);
-        stack.set(DataComponents.ITEM_MODEL, id.id().withPrefix(Motes.MOTE_PATH_PREFIX));
+
+        // Set the item model for dynamic texturing.
+        stack.set(DataComponents.ITEM_MODEL, id.id());
+
+        // Set the MoteId data component, defining the mote itself.
         stack.set(ModDataComponents.MOTE_ID, id);
+
         return stack;
     }
 

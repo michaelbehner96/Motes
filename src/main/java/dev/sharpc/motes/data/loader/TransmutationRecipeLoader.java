@@ -1,10 +1,8 @@
 package dev.sharpc.motes.data.loader;
 
 import dev.sharpc.motes.Motes;
-import dev.sharpc.motes.data.model.mote.MoteDefinition;
 import dev.sharpc.motes.data.model.mote.MoteId;
 import dev.sharpc.motes.data.model.recipe.TransmutationRecipe;
-import dev.sharpc.motes.data.registry.MoteDefinitions;
 import dev.sharpc.motes.data.registry.TransmutationRecipes;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.minecraft.resources.FileToIdConverter;
@@ -34,7 +32,7 @@ public class TransmutationRecipeLoader
     @Override
     protected void apply(Map<ResourceLocation, TransmutationRecipe> object, ResourceManager resourceManager, ProfilerFiller profilerFiller)
     {
-        MoteDefinitions.clear();
+        //MoteDefinitions.clear();
         for (var entry : object.entrySet())
             TransmutationRecipes.register(new MoteId(entry.getKey()), entry.getValue());
     }
