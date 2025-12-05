@@ -23,7 +23,7 @@ import java.util.Map;
  * Mote definitions are discovered under the following path in any data pack:
  *
  * <pre>
- * data/&lt;namespace&gt;/motes/&lt;path&gt;.json
+ * data/&lt;namespace&gt;/motes/mote/&lt;path&gt;.json
  * </pre>
  * <p>
  * For example, the file:
@@ -71,20 +71,6 @@ import java.util.Map;
  * <p>
  * This means that the data file path fully determines the MoteId.
  *
- * <p>
- *
- * <h2>🧩 JSON Schema</h2>
- * Individual definition files contain only the properties of the mote:
- *
- * <pre>{@code
- * {
- *   "stability": 0.95,
- *   "grain": "motes:grain/fire"
- * }
- * }</pre>
- * <p>
- * Their ID is <b>implicitly</b> derived from their location on disk and is not
- * stored inside the JSON.
  * <p>
  *
  * <h2>🔄 Resource Reload Behavior</h>

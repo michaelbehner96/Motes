@@ -2,6 +2,7 @@ package dev.sharpc.motes.registry;
 
 import dev.sharpc.motes.Motes;
 import dev.sharpc.motes.data.model.mote.GrainId;
+import dev.sharpc.motes.data.registry.GrainDefinitions;
 import dev.sharpc.motes.data.registry.MoteDefinitions;
 import dev.sharpc.motes.item.GrainItem;
 import dev.sharpc.motes.item.MoteItem;
@@ -24,17 +25,14 @@ public final class ModCreativeTabs
                            .displayItems((context, entries) ->
                            {
                                // Motes
-                               Motes.LOGGER.info("Dynamically adding motes to creative tab for {} definition(s).", MoteDefinitions.all().size());
+                               Motes.LOGGER.info("Adding motes to creative tab for {} definition(s).", MoteDefinitions.all().size());
                                for (var definition : MoteDefinitions.all().entrySet())
                                    entries.accept(MoteItem.stackOf(definition.getKey()));
 
                                // Grains
-                               entries.accept(GrainItem.stackOf(GrainId.FIRE));
-                               entries.accept(GrainItem.stackOf(GrainId.WATER));
-                               entries.accept(GrainItem.stackOf(GrainId.EARTH));
-                               entries.accept(GrainItem.stackOf(GrainId.WIND));
-                               entries.accept(GrainItem.stackOf(GrainId.LIGHT));
-                               entries.accept(GrainItem.stackOf(GrainId.DARK));
+                               Motes.LOGGER.info("Adding motes to creative tab for {} definition(s).", GrainDefinitions.all().size());
+                               for (var definition : GrainDefinitions.all().entrySet())
+                                   entries.accept(GrainItem.stackOf(definition.getKey()));
 
                                entries.accept(ModBlocks.FOCUS_CHAMBER);
                            }).build();

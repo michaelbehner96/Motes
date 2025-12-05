@@ -2,7 +2,9 @@ package dev.sharpc.motes.data.model.mote;
 
 import com.mojang.serialization.Codec;
 import dev.sharpc.motes.Motes;
+import dev.sharpc.motes.data.registry.MoteDefinitions;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Represents the unique identifier of a mote type in the Motes mod. A {@code MoteId}
@@ -119,21 +121,27 @@ public record MoteId(ResourceLocation id)
     public static final Codec<MoteId> CODEC =
             ResourceLocation.CODEC.xmap(MoteId::new, MoteId::id);
 
+    private static final String ID_TYPE = "mote";
     private static final String ID_PREFIX = "mote/";
 
     public MoteId
     {
         if (id == null)
-            throw new IllegalArgumentException("ResourceLocation of MoteId cannot be null.");
+            throw new IllegalArgumentException("ResourceLocation of %s cannot be null.".formatted(ID_PREFIX));
     }
 
     public String getTranslationKey()
     {
         var pathWithoutPrefix = id().getPath().replaceFirst(ID_PREFIX, "");
-        var moteNameStartIndex = pathWithoutPrefix.contains("/") ? id.getPath().lastIndexOf('/') + 1 : 0;
-        var moteName = pathWithoutPrefix.substring(moteNameStartIndex);
-        
-        return "mote." + id().getNamespace() + "." + moteName;
+        var nameStartIndex = pathWithoutPrefix.contains("/") ? id.getPath().lastIndexOf('/') + 1 : 0;
+        var name = pathWithoutPrefix.substring(nameStartIndex);
+
+        return "%s.%s.%s".formatted(ID_TYPE, id().getNamespace(), name);
+    }
+
+    public @Nullable MoteDefinition definition()
+    {
+        return MoteDefinitions.get(this);
     }
 
     private static MoteId of(String name)

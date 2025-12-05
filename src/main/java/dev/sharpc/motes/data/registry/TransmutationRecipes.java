@@ -37,11 +37,11 @@ public final class TransmutationRecipes
         return Collections.unmodifiableMap(RECIPES);
     }
 
-    public static @Nullable TransmutationRecipe find(MoteId moteId, GrainId substrate)
+    public static @Nullable TransmutationRecipe find(MoteId moteId, GrainId grainId)
     {
-        for (TransmutationRecipe recipe : RECIPES.values())
+        for (var recipe : RECIPES.values())
         {
-            if (recipe.catalystMoteId().equals(moteId) && recipe.substrateId().equals(substrate))
+            if (recipe.catalystMoteId().equals(moteId) && recipe.substrateId().equals(grainId))
             {
                 return recipe;
             }

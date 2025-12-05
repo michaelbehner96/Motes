@@ -32,7 +32,7 @@ public class TransmutationRecipeLoader
     @Override
     protected void apply(Map<ResourceLocation, TransmutationRecipe> object, ResourceManager resourceManager, ProfilerFiller profilerFiller)
     {
-        //MoteDefinitions.clear();
+        TransmutationRecipes.clear();
         for (var entry : object.entrySet())
             TransmutationRecipes.register(new MoteId(entry.getKey()), entry.getValue());
     }
