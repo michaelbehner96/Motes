@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.sharpc.motes.data.model.mote.GrainId;
 import dev.sharpc.motes.data.model.mote.MoteId;
-import net.minecraft.resources.ResourceLocation;
 
 public record TransmutationRecipe
         (

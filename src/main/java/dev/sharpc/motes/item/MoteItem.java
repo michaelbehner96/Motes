@@ -1,18 +1,21 @@
 package dev.sharpc.motes.item;
 
 import dev.sharpc.motes.data.model.mote.MoteId;
+import dev.sharpc.motes.mote.aspect.context.LevelingContext;
+import dev.sharpc.motes.mote.aspect.context.MoteContext;
+import dev.sharpc.motes.mote.aspect.component.LevelingComponent;
+import dev.sharpc.motes.mote.aspect.system.LevelingSystem;
 import dev.sharpc.motes.registry.ModDataComponents;
 import dev.sharpc.motes.registry.ModItems;
-import dev.sharpc.motes.data.registry.MoteDefinitions;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.function.Consumer;
 
 @SuppressWarnings("deprecation")
 public class MoteItem extends Item
@@ -29,42 +32,51 @@ public class MoteItem extends Item
         if (customName != null)
             return customName;
 
-        var moteId = stack.get(ModDataComponents.MOTE_ID);
+        var moteContext = MoteContext.from(stack);
+        if (moteContext == null) return super.getName(stack);
 
-        if (moteId == null)
-            return super.getName(stack);
+        var baseName = Component.translatable(moteContext.id().getTranslationKey());
+        var result = Component.translatable("item.motes.mote.named", baseName);
 
-        return Component.translatable("item.motes.mote.named",
-                Component.translatable(moteId.getTranslationKey()));
+        var levelingContext = LevelingContext.from(moteContext);
+        if (levelingContext == null) return result;
+
+        Component levelComponent = levelingContext.isMaxLevel()
+                ? Component.translatable("mote.level.max")
+                : Component.translatable("mote.level.format", levelingContext.state().level());
+
+        return Component.translatable("item.motes.mote.named_with_level", baseName, levelComponent);
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, TooltipContext tooltipContext, TooltipDisplay tooltipDisplay, Consumer<Component> consumer, TooltipFlag tooltipFlag)
+    public @NotNull InteractionResult use(Level level, Player player, InteractionHand hand)
     {
-        var id = itemStack.get(ModDataComponents.MOTE_ID);
+        ItemStack stack = player.getItemInHand(hand);
 
-        if (id != null)
+        if (!stack.is(ModItems.MOTE))
+            return InteractionResult.PASS;
+
+        if (!level.isClientSide())
         {
-            consumer.accept(Component.literal("MoteId: " + id.id()));
-            consumer.accept(Component.literal("Mote Model: " + id.id()));
+            var moteContext = MoteContext.from(stack);
+            if (moteContext == null) return InteractionResult.PASS;
 
-            var definition = MoteDefinitions.get(id);
+            var levelingContext = LevelingContext.from(moteContext);
+            if (levelingContext == null) return InteractionResult.PASS;
 
-            if (definition != null)
-                consumer.accept(Component.literal("Stability: " + definition.stability()));
+            LevelingSystem.addExperience(levelingContext, 1000);
         }
+
+        return InteractionResult.SUCCESS;
+
     }
 
     public static ItemStack stackOf(MoteId id, int quantity)
     {
         var stack = new ItemStack(ModItems.MOTE, quantity);
-
-        // Set the item model for dynamic texturing.
         stack.set(DataComponents.ITEM_MODEL, id.id());
-
-        // Set the MoteId data component, defining the mote itself.
         stack.set(ModDataComponents.MOTE_ID, id);
-
+        stack.set(ModDataComponents.MOTE_LEVELING, LevelingComponent.ofDefault());
         return stack;
     }
 

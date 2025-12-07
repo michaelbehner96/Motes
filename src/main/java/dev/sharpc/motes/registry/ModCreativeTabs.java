@@ -1,7 +1,6 @@
 package dev.sharpc.motes.registry;
 
 import dev.sharpc.motes.Motes;
-import dev.sharpc.motes.data.model.mote.GrainId;
 import dev.sharpc.motes.data.registry.GrainDefinitions;
 import dev.sharpc.motes.data.registry.MoteDefinitions;
 import dev.sharpc.motes.item.GrainItem;

@@ -2,6 +2,7 @@ package dev.sharpc.motes.data.model.mote;
 
 import com.mojang.serialization.Codec;
 import dev.sharpc.motes.Motes;
+import dev.sharpc.motes.data.loader.MoteDefinitionLoader;
 import dev.sharpc.motes.data.registry.MoteDefinitions;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
@@ -14,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
  *
  * <h2>📁 Origin of MoteIds (Data-Driven)</h2>
  * MoteIds are not written manually in code. Instead, they are created implicitly by
- * {@link dev.sharpc.motes.data.loader.MoteDefinitionLoader}, which derives IDs
+ * {@link MoteDefinitionLoader}, which derives IDs
  * directly from JSON file locations in data packs.
  * <p>
  * For a definition file located at:
@@ -111,8 +112,8 @@ import org.jetbrains.annotations.Nullable;
  * prefix.
  * <p>
  *
- * @see dev.sharpc.motes.data.model.mote.MoteDefinition
- * @see dev.sharpc.motes.data.loader.MoteDefinitionLoader
+ * @see MoteDefinition
+ * @see MoteDefinitionLoader
  * @see net.minecraft.resources.ResourceLocation
  */
 
