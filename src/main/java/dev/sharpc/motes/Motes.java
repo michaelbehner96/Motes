@@ -1,11 +1,10 @@
 package dev.sharpc.motes;
 
 import dev.sharpc.motes.data.loader.GrainDefinitionLoader;
+import dev.sharpc.motes.data.loader.MoteDefinitionLoader;
 import dev.sharpc.motes.data.loader.TransmutationRecipeLoader;
 import dev.sharpc.motes.registry.*;
-import dev.sharpc.motes.data.loader.MoteDefinitionLoader;
 import net.fabricmc.api.ModInitializer;
-
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;

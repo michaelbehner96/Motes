@@ -3,7 +3,6 @@ package dev.sharpc.motes.data.model.mote;
 import com.mojang.serialization.Codec;
 import dev.sharpc.motes.Motes;
 import dev.sharpc.motes.data.registry.GrainDefinitions;
-import dev.sharpc.motes.data.registry.MoteDefinitions;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
