@@ -2,15 +2,15 @@ package dev.sharpc.motes.data.model.recipe;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.sharpc.motes.data.model.mote.GrainId;
+import dev.sharpc.motes.data.model.mote.EssentiaId;
 import dev.sharpc.motes.data.model.mote.MoteId;
 
 public record TransmutationRecipe
         (
                 MoteId catalystMoteId,
-                GrainId substrateId,
+                EssentiaId substrateId,
                 int substrateQuantity,
-                GrainId productId,
+                EssentiaId productId,
                 int productQuantity,
                 int stagesPerCycle,
                 int ticksPerStage
@@ -21,9 +21,9 @@ public record TransmutationRecipe
             instance.group(
 
                     MoteId.CODEC.fieldOf("catalystMoteId").forGetter(TransmutationRecipe::catalystMoteId),
-                    GrainId.CODEC.fieldOf("substrateId").forGetter(TransmutationRecipe::substrateId),
+                    EssentiaId.CODEC.fieldOf("substrateId").forGetter(TransmutationRecipe::substrateId),
                     Codec.INT.fieldOf("substrateQuantity").forGetter(TransmutationRecipe::substrateQuantity),
-                    GrainId.CODEC.fieldOf("productId").forGetter(TransmutationRecipe::productId),
+                    EssentiaId.CODEC.fieldOf("productId").forGetter(TransmutationRecipe::productId),
                     Codec.INT.fieldOf("productQuantity").forGetter(TransmutationRecipe::productQuantity),
                     Codec.INT.fieldOf("stagesPerCycle").forGetter(TransmutationRecipe::stagesPerCycle),
                     Codec.INT.fieldOf("ticksPerStage").forGetter(TransmutationRecipe::ticksPerStage)

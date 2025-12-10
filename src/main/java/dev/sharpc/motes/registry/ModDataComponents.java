@@ -1,7 +1,7 @@
 package dev.sharpc.motes.registry;
 
 import dev.sharpc.motes.Motes;
-import dev.sharpc.motes.data.model.mote.GrainId;
+import dev.sharpc.motes.data.model.mote.EssentiaId;
 import dev.sharpc.motes.data.model.mote.MoteId;
 import dev.sharpc.motes.mote.aspect.component.LevelingComponent;
 import net.minecraft.core.Registry;
@@ -16,9 +16,9 @@ public final class ModDataComponents
                              .persistent(MoteId.CODEC)
                              .build());
 
-    public static final DataComponentType<GrainId> GRAIN_ID = register("grain_id",
-            DataComponentType.<GrainId>builder()
-                             .persistent(GrainId.CODEC)
+    public static final DataComponentType<EssentiaId> ESSENTIA_ID = register("essentia_id",
+            DataComponentType.<EssentiaId>builder()
+                             .persistent(EssentiaId.CODEC)
                              .build());
 
     public static final DataComponentType<LevelingComponent> MOTE_LEVELING = register("mote_leveling",

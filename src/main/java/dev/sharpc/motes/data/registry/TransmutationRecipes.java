@@ -1,6 +1,6 @@
 package dev.sharpc.motes.data.registry;
 
-import dev.sharpc.motes.data.model.mote.GrainId;
+import dev.sharpc.motes.data.model.mote.EssentiaId;
 import dev.sharpc.motes.data.model.mote.MoteId;
 import dev.sharpc.motes.data.model.recipe.TransmutationRecipe;
 import org.jetbrains.annotations.Nullable;
@@ -37,11 +37,11 @@ public final class TransmutationRecipes
         return Collections.unmodifiableMap(RECIPES);
     }
 
-    public static @Nullable TransmutationRecipe find(MoteId moteId, GrainId grainId)
+    public static @Nullable TransmutationRecipe find(MoteId moteId, EssentiaId essentiaId)
     {
         for (var recipe : RECIPES.values())
         {
-            if (recipe.catalystMoteId().equals(moteId) && recipe.substrateId().equals(grainId))
+            if (recipe.catalystMoteId().equals(moteId) && recipe.substrateId().equals(essentiaId))
             {
                 return recipe;
             }

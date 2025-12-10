@@ -2,6 +2,8 @@ package dev.sharpc.motes.mote.aspect.aspects;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import dev.sharpc.motes.mote.aspect.MoteAspectType;
+import dev.sharpc.motes.mote.aspect.MoteAspectTypes;
 
 public record StabilityAspect(
         double base

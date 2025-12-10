@@ -1,0 +1,51 @@
+| Root (Noun) | Essentia        | Adjective                  | Example           |
+| ----------- | --------------- | -------------------------- | ----------------- |
+|   Ignis     | Ignis Essentia  |   Igneous                  |   Igneous Mote    |
+|   Aqua      | Aqua Essentia   |   Aqueous                  |   Aqueous Mote    |
+|   Ventus    | Ventus Essentia |   Ventosus                 |   Ventosus Mote   |
+|   Terra     | Terra Essentia  |   Terran / Terrestrial     |   Terran Mote     |
+|   Lux       | Lux Essentia    |   Luminous   (or  Luxian ) |   Luminous Mote   |
+|   Umbra     | Umbra Essentia  |   Umbral                   |   Umbral Mote     |
+
+
+| Root (Noun)           | Essentia            | Adjective                      | Example          |
+| --------------------- | ------------------- | ------------------------------ | ---------------- |
+|   Glacies   (ice)     | Glacies Essentia    |   Glacial                      | Glacial Mote     |
+|   Tempestas   (storm) | Tempestas Essentia  |   Tempestuous                  | Tempestuous Mote |
+|   Natura              | Natura Essentia     |   Natural / Naturan            | Naturan Mote     |
+|   Ferrum   (metal)    | Ferrum Essentia     |   Ferrous                      | Ferrous Mote     |
+|   Magma               | Magma Essentia      |   Magmatic                     | Magmatic Mote    |
+|   Venenum   (poison)  | Venenum Essentia    |   Venin / Venomous / Venefic   | Venefic Mote     |
+|   Crystallum          | Crystallum Essentia |   Crystalline                  | Crystalline Mote |
+|   Pulvis   (dust)     | Pulvis Essentia     |   Pulveric / Dustborn          | Pulveric Mote    |
+|   Vapor               | Vapor Essentia      |   Vaporous                     | Vaporous Mote    |
+
+
+| Root                          | Essentia             | Adjective                 | Example         |
+| ----------------------------- | -------------------- | ------------------------- | --------------- |
+|   Arcanum                     | Arcanum Essentia     |   Arcane                  | Arcane Mote     |
+|   Gravitatis                  | Gravitatis Essentia  |   Gravitic                | Gravitic Mote   |
+|   Chaos                       | Chaos Essentia       |   Chaotic                 | Chaotic Mote    |
+|   Ordinis   (order)           | Ordinis Essentia     |   Ordinate / Ordered      | Ordinate Mote   |
+|   Spiritus                    | Spiritus Essentia    |   Spiritual               | Spiritual Mote  |
+|   Corruptio                   | Corruptio Essentia   |   Corruptive              | Corruptive Mote |
+|   Radiantia                   | Radiantia Essentia   |   Radiant                 | Radiant Mote    |
+|   Sanguis   (blood)           | Sanguis Essentia     |   Sanguine                | Sanguine Mote   |
+|   Umbrafervor   (shadowflame) | Umbrafervor Essentia |   Umbric / Shadowflame    | Umbric Mote     |
+|   Vis   (force)               | Vis Essentia         |   Visceral / Forcebound   | Visceral Mote   |
+|   Sonus                       | Sonus Essentia       |   Sonic                   | Sonic Mote      |
+
+| Root              | Essentia           | Adjective                | Example         |
+| ----------------- | ------------------ | ------------------------ | --------------- |
+|   Vita            | Vita Essentia      |   Vital                  | Vital Mote      |
+|   Mortis          | Mortis Essentia    |   Mortal / Mortic        | Mortic Mote     |
+|   Tempus          | Tempus Essentia    |   Temporal               | Temporal Mote   |
+|   Aeternum        | Aeternum Essentia  |   Eternal                | Eternal Mote    |
+|   Inanis   (void) | Inanis Essentia    |   Inane / Voidborn       | Inane Mote      |
+|   Astralis        | Astralis Essentia  |   Astral                 | Astral Mote     |
+|   Genesis         | Genesis Essentia   |   Genesis / Generative   | Generative Mote |
+|   Ruina           | Ruina Essentia     |   Ruinous                | Ruinous Mote    |
+|   Divinitas       | Divinitas Essentia |   Divine                 | Divine Mote     |
+|   Infernum        | Infernum Essentia  |   Infernal               | Infernal Mote   |
+|   Fatum           | Fatum Essentia     |   Fateful                | Fateful Mote    |
+|   Somnium         | Somnium Essentia   |   Somnal / Dreamlike     | Somnal Mote     |

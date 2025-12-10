@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.sharpc.motes.mote.aspect.MoteAspectSerializationHelper;
 import dev.sharpc.motes.mote.aspect.aspects.MoteAspect;
-import dev.sharpc.motes.mote.aspect.aspects.MoteAspectType;
+import dev.sharpc.motes.mote.aspect.MoteAspectType;
 
 import java.util.Map;
 

@@ -1,0 +1,33 @@
+{
+  "aspects": {
+    "motes:manifestatio":  {
+      "essentiaId":     "motes:essentia/ignis",
+      "ticksPerCycle":  6000,
+      "outputPerCycle": 1
+    },
+    "motes:stability":     {
+      "base": 0.85
+    },
+    "motes:leveling":      {
+      "maxLevel":         60,
+      "baseExp":          80,
+      "perLevelBase":     20,
+      "perLevelExponent": 1.10
+    },
+    "motes:environmental": {
+      "preferredBiomes":     [
+        "minecraft:desert",
+        "minecraft:badlands",
+        "minecraft:nether_wastes"
+      ],
+      "dislikedBiomes":      [
+        "minecraft:snowy_plains",
+        "minecraft:frozen_peaks",
+        "minecraft:ocean"
+      ],
+      "preferredMultiplier": 1.30,
+      "dislikedMultiplier":  0.70,
+      "neutralMultiplier":   1.00
+    }
+  }
+}

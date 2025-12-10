@@ -1,6 +1,8 @@
 package dev.sharpc.motes.mote.aspect.aspects;
 
-public sealed interface MoteAspect permits StabilityAspect, EnvironmentalAspect, LevelingAspect
+import dev.sharpc.motes.mote.aspect.MoteAspectType;
+
+public sealed interface MoteAspect permits StabilityAspect, EnvironmentalAspect, LevelingAspect, ManifestatioAspect
 {
     MoteAspectType<?> type();
 }

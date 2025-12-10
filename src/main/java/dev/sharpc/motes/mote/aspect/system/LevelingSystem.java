@@ -1,15 +1,8 @@
 package dev.sharpc.motes.mote.aspect.system;
 
-import dev.sharpc.motes.Motes;
-import dev.sharpc.motes.data.registry.MoteDefinitions;
 import dev.sharpc.motes.mote.aspect.component.LevelingComponent;
-import dev.sharpc.motes.mote.aspect.aspects.LevelingAspect;
-import dev.sharpc.motes.mote.aspect.aspects.MoteAspectTypes;
 import dev.sharpc.motes.mote.aspect.context.LevelingContext;
-import dev.sharpc.motes.mote.aspect.context.MoteContext;
 import dev.sharpc.motes.registry.ModDataComponents;
-import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
 
 public final class LevelingSystem
 {
@@ -39,5 +32,4 @@ public final class LevelingSystem
 
         return LevelingContext.from(context.moteContext());
     }
-
 }

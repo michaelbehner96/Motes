@@ -1,0 +1,34 @@
+{
+  "aspects": {
+    "motes:manifestatio":  {
+      "essentiaId":     "motes:essentia/umbra",
+      "ticksPerCycle":  6000,
+      "outputPerCycle": 1
+    },
+    "motes:stability":     {
+      "base": 0.15
+    },
+    "motes:leveling":      {
+      "maxLevel":         100,
+      "baseExp":          110,
+      "perLevelBase":     32,
+      "perLevelExponent": 1.30
+    },
+    "motes:environmental": {
+      "preferredBiomes":     [
+        "minecraft:deep_dark",
+        "minecraft:soul_sand_valley",
+        "minecraft:warped_forest",
+        "minecraft:dark_forest"
+      ],
+      "dislikedBiomes":      [
+        "minecraft:sunflower_plains",
+        "minecraft:meadow",
+        "minecraft:mushroom_fields"
+      ],
+      "preferredMultiplier": 1.35,
+      "dislikedMultiplier":  0.65,
+      "neutralMultiplier":   1.00
+    }
+  }
+}

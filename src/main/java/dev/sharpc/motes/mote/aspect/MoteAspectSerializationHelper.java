@@ -6,8 +6,6 @@ import com.mojang.serialization.Dynamic;
 import com.mojang.serialization.JsonOps;
 import dev.sharpc.motes.Motes;
 import dev.sharpc.motes.mote.aspect.aspects.MoteAspect;
-import dev.sharpc.motes.mote.aspect.aspects.MoteAspectType;
-import dev.sharpc.motes.mote.aspect.aspects.MoteAspectTypes;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.HashMap;

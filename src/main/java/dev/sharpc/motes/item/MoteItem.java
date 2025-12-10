@@ -7,6 +7,7 @@ import dev.sharpc.motes.mote.aspect.component.LevelingComponent;
 import dev.sharpc.motes.mote.aspect.system.LevelingSystem;
 import dev.sharpc.motes.registry.ModDataComponents;
 import dev.sharpc.motes.registry.ModItems;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -42,10 +43,10 @@ public class MoteItem extends Item
         if (levelingContext == null) return result;
 
         Component levelComponent = levelingContext.isMaxLevel()
-                ? Component.translatable("mote.level.max")
-                : Component.translatable("mote.level.format", levelingContext.state().level());
+                ? Component.translatable("mote.level.max", levelingContext.state().level()).withStyle(ChatFormatting.GOLD).withStyle(ChatFormatting.BOLD)
+                : Component.translatable("mote.level.format", levelingContext.state().level()).withStyle(ChatFormatting.GRAY);
 
-        return Component.translatable("item.motes.mote.named_with_level", baseName, levelComponent);
+        return Component.translatable("item.motes.mote.named.with_level", result, levelComponent);
     }
 
     @Override

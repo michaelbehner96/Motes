@@ -1,0 +1,33 @@
+{
+  "aspects": {
+    "motes:manifestatio":  {
+      "essentiaId":     "motes:essentia/lux",
+      "ticksPerCycle":  6000,
+      "outputPerCycle": 1
+    },
+    "motes:stability":     {
+      "base": 0.99
+    },
+    "motes:leveling":      {
+      "maxLevel":         90,
+      "baseExp":          100,
+      "perLevelBase":     28,
+      "perLevelExponent": 1.05
+    },
+    "motes:environmental": {
+      "preferredBiomes":     [
+        "minecraft:plains",
+        "minecraft:sunflower_plains",
+        "minecraft:desert"
+      ],
+      "dislikedBiomes":      [
+        "minecraft:deep_dark",
+        "minecraft:basalt_deltas",
+        "minecraft:nether_wastes"
+      ],
+      "preferredMultiplier": 1.30,
+      "dislikedMultiplier":  0.70,
+      "neutralMultiplier":   1.00
+    }
+  }
+}

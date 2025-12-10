@@ -2,6 +2,8 @@ package dev.sharpc.motes.mote.aspect.aspects;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import dev.sharpc.motes.mote.aspect.MoteAspectType;
+import dev.sharpc.motes.mote.aspect.MoteAspectTypes;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;

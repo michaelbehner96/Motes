@@ -4,7 +4,7 @@ import dev.sharpc.motes.data.model.mote.MoteDefinition;
 import dev.sharpc.motes.data.model.mote.MoteId;
 import dev.sharpc.motes.data.registry.MoteDefinitions;
 import dev.sharpc.motes.mote.aspect.aspects.MoteAspect;
-import dev.sharpc.motes.mote.aspect.aspects.MoteAspectType;
+import dev.sharpc.motes.mote.aspect.MoteAspectType;
 import dev.sharpc.motes.registry.ModDataComponents;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;

@@ -1,10 +1,10 @@
 package dev.sharpc.motes;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import dev.sharpc.motes.mote.aspect.aspects.MoteAspectType;
-import dev.sharpc.motes.mote.aspect.aspects.MoteAspectTypes;
+import dev.sharpc.motes.mote.aspect.MoteAspectTypes;
 import dev.sharpc.motes.mote.aspect.aspects.StabilityAspect;
 import dev.sharpc.motes.mote.aspect.context.LevelingContext;
+import dev.sharpc.motes.mote.aspect.context.ManifestatioContext;
 import dev.sharpc.motes.mote.aspect.context.MoteContext;
 import dev.sharpc.motes.registry.ModItems;
 import dev.sharpc.motes.registry.ModMenus;
@@ -33,37 +33,35 @@ public class MotesClient implements ClientModInitializer
 
             if (!isHoldingShift())
             {
-                lines.add(Component.literal("Hold [SHIFT] for more info").withStyle(ChatFormatting.DARK_GRAY));
+                lines.add(Component.translatable("tooltip.motes.info").withStyle(ChatFormatting.DARK_GRAY));
                 return;
             }
 
             var stabilityAspect = moteContext.getAspect(MoteAspectTypes.STABILITY);
             if (stabilityAspect != null)
-            {
-                lines.add(Component.empty()
-                                   .append(Component.literal("Stability: ").withStyle(ChatFormatting.GRAY))
-                                   .append(styledStabilityComponent(stabilityAspect))
-                );
-            }
+                lines.add(Component.translatable("tooltip.motes.stability", styledStabilityComponent(stabilityAspect)).withStyle(ChatFormatting.GRAY));
 
             var levelingContext = LevelingContext.from(moteContext);
             if (levelingContext != null)
             {
-                var levelProgress = levelingContext.isMaxLevel() ? "MAX" :
-                        "%s/%s".formatted(
-                                levelingContext.state().exp(),
-                                levelingContext.aspect().experienceRequiredFor(levelingContext.state().level() + 1));
-
-                var experienceComponent = levelingContext.isMaxLevel()
-                        ? Component.translatable("tooltip.motes.leveling.progress.max").withStyle(ChatFormatting.GOLD)
-                        : Component.translatable(
-                        "tooltip.motes.leveling.progress",
+                var experienceProgress = levelingContext.isMaxLevel()
+                        ? Component.translatable("tooltip.motes.leveling.experience.progress.max").withStyle(ChatFormatting.GOLD)
+                        : Component.translatable("tooltip.motes.leveling.experience.progress",
                         levelingContext.state().exp(),
                         levelingContext.experienceRequiredForNextLevel()).withStyle(ChatFormatting.GRAY);
 
-                lines.add(experienceComponent);
+                var experienceTooltip = Component.translatable("tooltip.motes.leveling.experience", experienceProgress).withStyle(ChatFormatting.GRAY);
+                lines.add(experienceTooltip);
             }
 
+            var manifestatioContext = ManifestatioContext.from(moteContext);
+            if (manifestatioContext != null)
+            {
+                var essentiaName = Component.translatable(manifestatioContext.manifestatioAspect().essentiaId().getTranslationKey());
+                var essentiaLabel = Component.translatable("item.motes.essentia.named", essentiaName).withStyle(ChatFormatting.WHITE);
+                var essentiaTooltip = Component.translatable("tooltip.motes.manifestatio", essentiaName).withStyle(ChatFormatting.GRAY);
+                lines.add(essentiaTooltip);
+            }
         });
     }
 

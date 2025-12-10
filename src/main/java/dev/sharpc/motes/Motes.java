@@ -1,6 +1,6 @@
 package dev.sharpc.motes;
 
-import dev.sharpc.motes.data.loader.GrainDefinitionLoader;
+import dev.sharpc.motes.data.loader.EssentiaDefinitionLoader;
 import dev.sharpc.motes.data.loader.MoteDefinitionLoader;
 import dev.sharpc.motes.data.loader.TransmutationRecipeLoader;
 import dev.sharpc.motes.registry.*;
@@ -34,7 +34,7 @@ public class Motes implements ModInitializer
 
         ResourceManagerHelper
                 .get(PackType.SERVER_DATA)
-                .registerReloadListener(new GrainDefinitionLoader());
+                .registerReloadListener(new EssentiaDefinitionLoader());
 
         ResourceManagerHelper
                 .get(PackType.SERVER_DATA)

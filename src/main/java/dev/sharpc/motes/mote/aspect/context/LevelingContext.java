@@ -2,7 +2,7 @@ package dev.sharpc.motes.mote.aspect.context;
 
 import dev.sharpc.motes.mote.aspect.component.LevelingComponent;
 import dev.sharpc.motes.mote.aspect.aspects.LevelingAspect;
-import dev.sharpc.motes.mote.aspect.aspects.MoteAspectTypes;
+import dev.sharpc.motes.mote.aspect.MoteAspectTypes;
 import org.jetbrains.annotations.Nullable;
 
 public record LevelingContext(
@@ -16,14 +16,14 @@ public record LevelingContext(
         var levelingAspect = context.getAspect(MoteAspectTypes.LEVELING);
         if (levelingAspect == null) return null;
 
-        var levelingState = LevelingComponent.fromOrInit(context.stack());
+        var levelingComponent = LevelingComponent.fromOrInit(context.stack());
 
-        return new LevelingContext(context, levelingAspect, levelingState);
+        return new LevelingContext(context, levelingAspect, levelingComponent);
     }
 
     public boolean isMaxLevel()
     {
-        return state.level() >= aspect.maxLevel();
+        return state.level() == aspect.maxLevel();
     }
 
     public int experienceUntilNextLevel()

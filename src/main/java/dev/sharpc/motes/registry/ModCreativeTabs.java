@@ -1,9 +1,9 @@
 package dev.sharpc.motes.registry;
 
 import dev.sharpc.motes.Motes;
-import dev.sharpc.motes.data.registry.GrainDefinitions;
+import dev.sharpc.motes.data.registry.EssentiaDefinitions;
 import dev.sharpc.motes.data.registry.MoteDefinitions;
-import dev.sharpc.motes.item.GrainItem;
+import dev.sharpc.motes.item.EssentiaItem;
 import dev.sharpc.motes.item.MoteItem;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.core.Registry;
@@ -28,10 +28,10 @@ public final class ModCreativeTabs
                                for (var definition : MoteDefinitions.all().entrySet())
                                    entries.accept(MoteItem.stackOf(definition.getKey()));
 
-                               // Grains
-                               Motes.LOGGER.info("Adding motes to creative tab for {} definition(s).", GrainDefinitions.all().size());
-                               for (var definition : GrainDefinitions.all().entrySet())
-                                   entries.accept(GrainItem.stackOf(definition.getKey()));
+                               // Essentia
+                               Motes.LOGGER.info("Adding essentia to creative tab for {} definition(s).", EssentiaDefinitions.all().size());
+                               for (var definition : EssentiaDefinitions.all().entrySet())
+                                   entries.accept(EssentiaItem.stackOf(definition.getKey()));
 
                                entries.accept(ModBlocks.FOCUS_CHAMBER);
                            }).build();

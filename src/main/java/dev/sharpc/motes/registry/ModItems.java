@@ -1,7 +1,7 @@
 package dev.sharpc.motes.registry;
 
 import dev.sharpc.motes.Motes;
-import dev.sharpc.motes.item.GrainItem;
+import dev.sharpc.motes.item.EssentiaItem;
 import dev.sharpc.motes.item.MoteItem;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -19,9 +19,9 @@ public final class ModItems
             MoteItem::new,
             new Item.Properties());
 
-    public static final Item GRAIN = register(
-            "grain",
-            GrainItem::new,
+    public static final Item ESSENTIA = register(
+            "essentia",
+            EssentiaItem::new,
             new Item.Properties());
 
     public static Item register(String name, Function<Item.Properties, Item> function, Item.Properties properties)
